@@ -7,7 +7,7 @@ APP_LIST=(
 
 # vim-plug installation script
 orig_app_setup() {
-  check_commands git maturin|| return
+  check_commands git || return
 
   mkdir -p git
   cd git || return

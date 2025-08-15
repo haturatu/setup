@@ -7,10 +7,20 @@ APP_LIST=(
 
 # vim-plug installation script
 orig_app_setup() {
-  check_commands curl vim go || return
+  check_commands git maturin|| return
 
   mkdir -p git
   cd git || return
+  if [ ! -d "dotfiles" ]; then
+    git clone https://github.com/haturatu/dotfiles.git
+    cd dotfiles || return
+    make install
+    source ~/.bashrc || return
+  else
+    cd dotfiles || return
+    git pull || { echo "Failed to update dotfiles"; return; }
+  fi
+
   for app in "${APP_LIST[@]}"; do
     git clone "$app" || { echo "Failed to clone $app"; continue; }
     app_name=$(basename "$app" .git)

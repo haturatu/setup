@@ -40,7 +40,7 @@ orig_app_setup() {
 
     if [ -f "Makefile" ]; then
       echo "Installing $app_name using Makefile..."
-      sudo make build || { echo "Make build failed for $app_name"; continue; }
+      make build || { echo "Make build failed for $app_name"; continue; }
       sudo make install || { echo "Make failed for $app_name"; continue; }
     elif [ -f "install.sh" ]; then
       echo "Running install script for $app_name..."

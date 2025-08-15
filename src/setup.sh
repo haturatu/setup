@@ -1,8 +1,13 @@
 #!/bin/bash
 set -x
 
-GIT_USER="haturatu"
-GIT_EMAIL="taro@eyes4you.org"
+#GIT_USER="haturatu"
+#GIT_EMAIL="taro@eyes4you.org"
+
+if [ -z "${GIT_USER}" ] || [ -z "${GIT_EMAIL}" ]; then
+    echo "Please set GIT_USER and GIT_EMAIL environment variables."
+    exit 1
+fi
 
 source ./func/00_package_install.sh
 source ./func/01_vim.sh

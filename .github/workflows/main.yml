@@ -21,6 +21,7 @@ jobs:
         export GIT_USER="test"
         export GIT_EMAIL="test@test.local"
         export ID=ubuntu
-        chmod +x ./src/setup.sh
-        ./src/setup.sh
+        cd src
+        chmod +x ./setup.sh
+        ./setup.sh
 

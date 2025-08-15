@@ -1,0 +1,24 @@
+name: Ubutu Runner
+
+on:
+  push:
+    branches: [ "main" ]
+    path-ignore:
+      - '**/README.md'
+
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build
+      run: |
+        export GIT_USER="test"
+        export GIT_EMAIL="test@test.local"
+        ./src/setup.sh
+

@@ -20,7 +20,7 @@ apt_setup() {
   sudo apt install -y \
     git vim curl golang-go build-essential \
     python3 python3-pip python3-venv nodejs npm \
-    cargo wget 7zip rbenv ruby-build ufw tree
+    cargo wget 7zip rbenv ruby-build ufw tree maturin
   sudo ufw enable
 }
 
@@ -31,7 +31,7 @@ pacman_setup() {
   sudo pacman -Syu --noconfirm \
     git vim curl go base-devel \
     python python-pip python-virtualenv \                                             nodejs npm cargo wget 7zip rbenv ruby-build \
-    chromium geoip ufw tree
+    chromium geoip ufw tree maturin
   sudo ufw enable
 
   # Install mozoc and fcitx5
@@ -57,7 +57,7 @@ brew_setup() {
   check_commands brew || return
 
   echo "Installing Homebrew packages..."
-  brew install git vim curl go python node npm cargo wget p7zip curl rbenv ruby-build tree
+  brew install git vim curl go python node npm cargo wget p7zip curl rbenv ruby-build tree maturin
   # Change default curl to use the Homebrew version
   echo 'export PATH="/opt/homebrew/opt/curl/bin:$PATH"' >> ~/.zshrc
   source ~/.zshrc

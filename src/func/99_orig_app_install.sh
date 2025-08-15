@@ -26,6 +26,18 @@ orig_app_setup() {
     app_name=$(basename "$app" .git)
     cd "$app_name" || continue
 
+    # Check for requirements.txt and install Python dependencies if it exists
+    if [ -f "requirements.txt" ]; then
+      echo "Installing Python dependencies for $app_name..."
+      if command -v pip3 >/dev/null 2>&1; then
+        pip3 install -r requirements.txt || { echo "pip install failed for $app_name"; continue; }
+      elif command -v pip >/dev/null 2>&1; then
+        pip install -r requirements.txt || { echo "pip install failed for $app_name"; continue; }
+      else
+        echo "pip not found, skipping Python dependencies for $app_name"
+      fi
+    fi
+
     if [ -f "Makefile" ]; then
       echo "Installing $app_name using Makefile..."
       sudo make build || { echo "Make build failed for $app_name"; continue; }

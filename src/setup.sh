@@ -1,5 +1,6 @@
 #!/bin/bash
 set -x
+set -euo pipefail
 
 #GIT_USER="haturatu"
 #GIT_EMAIL="taro@eyes4you.org"
@@ -12,6 +13,7 @@ fi
 source ./func/00_package_install.sh
 source ./func/01_vim.sh
 source ./func/02_git.sh
+source ./func/03_pip.sh
 source ./func/99_orig_app_install.sh
 
 missing_command=()
@@ -65,6 +67,7 @@ main() {
 
   vim_setup
   git_setup
+  pip_setup
   orig_app_setup
 }
 

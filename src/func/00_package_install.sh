@@ -27,6 +27,7 @@ apt_setup() {
 # Arch/Manjaro/Artix specific setup
 pacman_setup() {
   echo "Installing necessary packages..."
+  sudo pacman -Rdd linux-firmware
   sudo pacman -Syu --noconfirm \
     git vim curl go base-devel \
     python python-pip python-virtualenv \                                             nodejs npm cargo wget 7zip rbenv ruby-build \

@@ -5,10 +5,10 @@ timezone_set() {
     local timezone="Asia/Tokyo"
     
     # Set the timezone
-    ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime
+    sudo ln -sf "/usr/share/zoneinfo/$timezone" /etc/localtime
     
     # Update the system clock
-    hwclock --systohc
+    sudo hwclock --systohc
     
     echo "Timezone set to $timezone and system clock updated."
 }

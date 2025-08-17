@@ -22,11 +22,14 @@ maybe ...
 
 # files
 ```
-|-- README.md
-`-- src
-    |-- func
-    |   |-- 00_package_install.sh
-    |   |-- 01_vim.sh
-    |   `-- 02_git.sh
-    `-- setup.sh
+├── README.md
+└── src
+    ├── func
+    │   ├── 00_package_install.sh
+    │   ├── 01_vim.sh
+    │   ├── 02_git.sh
+    │   ├── 03_pip.sh
+    │   ├── 04_timezone.sh
+    │   └── 99_orig_app_install.sh
+    └── setup.sh
 ```

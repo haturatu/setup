@@ -14,7 +14,7 @@ source ./func/00_package_install.sh
 source ./func/01_vim.sh
 source ./func/02_git.sh
 source ./func/03_pip.sh
-source ./func/03_timezone.sh
+source ./func/04_timezone.sh
 source ./func/99_orig_app_install.sh
 
 missing_command=()

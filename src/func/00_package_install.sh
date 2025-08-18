@@ -20,7 +20,8 @@ apt_setup() {
   sudo apt install -y \
     git vim curl golang-go build-essential \
     python3 python3-pip python3-venv nodejs npm \
-    cargo wget 7zip rbenv ruby-build ufw tree maturin
+    cargo wget 7zip rbenv ruby-build ufw tree maturin \
+    chafa 
   sudo ufw enable
 }
 
@@ -30,8 +31,10 @@ pacman_setup() {
   sudo pacman -Rdd linux-firmware
   sudo pacman -Syu --noconfirm \
     git vim curl go base-devel \
-    python python-pip python-virtualenv \                                             nodejs npm cargo wget 7zip rbenv ruby-build \
-    chromium geoip ufw tree maturin
+    python python-pip python-virtualenv \
+    nodejs npm cargo wget 7zip rbenv ruby-build \
+    chromium geoip ufw tree maturin \
+    chafa
   sudo ufw enable
 
   # Install mozoc and fcitx5

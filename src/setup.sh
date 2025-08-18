@@ -41,6 +41,7 @@ dotfiles_install() {
     echo "Creating directory for dotfiles..."
     mkdir -p "$HOME/git"
     git clone https://github.com/haturatu/dotfiles.git
+    make backup
     make install
   else
     echo "Directory for dotfiles already exists."

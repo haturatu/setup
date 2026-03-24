@@ -21,7 +21,7 @@ apt_setup() {
     git vim curl golang-go build-essential \
     python3 python3-pip python3-venv nodejs npm \
     cargo wget 7zip rbenv ruby-build ufw tree maturin \
-    chafa 
+    chafa bash-completion
   sudo ufw enable
 }
 
@@ -39,7 +39,7 @@ pacman_setup() {
     python python-pip python-virtualenv
     nodejs npm rust wget 7zip rbenv ruby-build
     chromium geoip ufw tree maturin
-    chafa
+    chafa bash-completion
   )
   local repo_packages=()
   local missing_packages=()

@@ -8,7 +8,7 @@ apt_setup() {
   sudo apt install -y \
     git vim curl golang-go build-essential \
     python3 python3-pip python3-venv nodejs npm \
-    cargo wget 7zip rbenv ruby-build ufw tree maturin \
+    cargo wget 7zip rbenv ruby-build ufw tree python3-maturin \
     chafa bash-completion
 
   sudo ufw enable

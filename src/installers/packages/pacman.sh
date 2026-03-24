@@ -14,6 +14,7 @@ pacman_setup() {
     python python-pip python-virtualenv
     nodejs npm rust wget 7zip rbenv ruby-build
     chromium geoip ufw tree maturin
+    docker docker-buildx docker-compose
     chafa bash-completion
   )
   local repo_packages=()

@@ -1,4 +1,4 @@
-name: Ubutu Runner
+name: Setup Runner
 
 on:
   push:
@@ -10,18 +10,29 @@ on:
     branches: [ "main" ]
 
 jobs:
-
-  build:
+  ubuntu:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - name: Build
+        env:
+          GIT_USER: test
+          GIT_EMAIL: test@test.local
+        run: |
+          cd src
+          chmod +x ./setup.sh
+          ./setup.sh
 
-    - name: Build
-      run: |
-        export GIT_USER="test"
-        export GIT_EMAIL="test@test.local"
-        export ID=ubuntu
-        cd src
-        chmod +x ./setup.sh
-        ./setup.sh
-
+  arch:
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        env:
+          GIT_USER: test
+          GIT_EMAIL: test@test.local
+        run: |
+          cd src
+          chmod +x ./setup.sh
+          ./setup.sh

@@ -4,10 +4,10 @@ pacman_setup() {
   log_info "Installing necessary packages..."
 
   if pacman -Qi linux-firmware >/dev/null 2>&1; then
-    sudo pacman -Rdd --noconfirm linux-firmware
+    run_as_root pacman -Rdd --noconfirm linux-firmware
   fi
 
-  sudo pacman -Syu --noconfirm
+  run_as_root pacman -Syu --noconfirm
 
   local base_packages=(
     git vim curl go base-devel
@@ -31,10 +31,10 @@ pacman_setup() {
   done
 
   if [ "${#repo_packages[@]}" -gt 0 ]; then
-    sudo pacman -S --noconfirm --needed "${repo_packages[@]}"
+    run_as_root pacman -S --noconfirm --needed "${repo_packages[@]}"
   fi
 
-  sudo ufw enable
+  run_as_root ufw enable
 
   for pkg in "${ime_packages[@]}"; do
     if pacman -Si "$pkg" >/dev/null 2>&1; then
@@ -45,11 +45,11 @@ pacman_setup() {
   done
 
   if [ "${#ime_install[@]}" -gt 0 ]; then
-    sudo pacman -S --noconfirm --needed "${ime_install[@]}"
+    run_as_root pacman -S --noconfirm --needed "${ime_install[@]}"
   fi
 
   if pacman -Si fakeroot >/dev/null 2>&1; then
-    sudo pacman -S --noconfirm --needed fakeroot
+    run_as_root pacman -S --noconfirm --needed fakeroot
   fi
 
   if command -v yay >/dev/null 2>&1; then

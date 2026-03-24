@@ -26,7 +26,7 @@ install_app_payload() {
 
     case "$install_method" in
       sudo)
-        sudo make install
+        run_as_root make install
         ;;
       user)
         make install

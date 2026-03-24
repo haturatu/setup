@@ -44,6 +44,21 @@ ensure_dir() {
   mkdir -p "$1"
 }
 
+run_as_root() {
+  if [ "$(id -u)" -eq 0 ]; then
+    "$@"
+    return
+  fi
+
+  if command -v sudo >/dev/null 2>&1; then
+    sudo "$@"
+    return
+  fi
+
+  log_error "This step requires root privileges: $*"
+  return 1
+}
+
 clone_or_update_repo() {
   local repo_url="$1"
   local dest_dir="$2"

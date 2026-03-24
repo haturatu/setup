@@ -34,7 +34,7 @@ pacman_setup() {
     run_as_root pacman -S --noconfirm --needed "${repo_packages[@]}"
   fi
 
-  run_as_root ufw enable
+  enable_ufw_if_possible
 
   for pkg in "${ime_packages[@]}"; do
     if pacman -Si "$pkg" >/dev/null 2>&1; then

@@ -59,6 +59,20 @@ run_as_root() {
   return 1
 }
 
+enable_ufw_if_possible() {
+  if ! command -v ufw >/dev/null 2>&1; then
+    log_info "ufw command not found. Skipping firewall setup."
+    return 0
+  fi
+
+  if run_as_root ufw enable; then
+    return 0
+  fi
+
+  log_info "ufw enable failed in this environment. Skipping firewall setup."
+  return 0
+}
+
 clone_or_update_repo() {
   local repo_url="$1"
   local dest_dir="$2"

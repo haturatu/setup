@@ -11,5 +11,5 @@ apt_setup() {
     cargo wget 7zip rbenv ruby-build ufw tree python3-maturin \
     chafa bash-completion
 
-  run_as_root ufw enable
+  enable_ufw_if_possible
 }

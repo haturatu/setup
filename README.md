@@ -20,16 +20,36 @@ arch, manjaro, artix
 ### homebrew
 maybe ...
 
+# src layout
+`src` is organized by responsibility instead of execution order.
+
+- `lib/`: shared helpers such as environment checks and OS detection
+- `config/`: declarative settings such as app repository definitions
+- `installers/packages/`: package manager specific setup
+- `installers/tools/`: tool and environment configuration
+- `installers/apps/`: dotfiles and personal application installers
+
 # files
 ```
 ├── README.md
 └── src
-    ├── func
-    │   ├── 00_package_install.sh
-    │   ├── 01_vim.sh
-    │   ├── 02_git.sh
-    │   ├── 03_pip.sh
-    │   ├── 04_timezone.sh
-    │   └── 99_orig_app_install.sh
+    ├── config
+    │   └── apps.sh
+    ├── installers
+    │   ├── apps
+    │   │   ├── dotfiles.sh
+    │   │   └── orig_apps.sh
+    │   ├── packages
+    │   │   ├── apt.sh
+    │   │   ├── brew.sh
+    │   │   └── pacman.sh
+    │   └── tools
+    │       ├── git.sh
+    │       ├── pip.sh
+    │       ├── timezone.sh
+    │       └── vim.sh
+    ├── lib
+    │   ├── common.sh
+    │   └── os.sh
     └── setup.sh
 ```

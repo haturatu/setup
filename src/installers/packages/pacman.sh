@@ -52,6 +52,17 @@ pacman_setup() {
     run_as_root pacman -S --noconfirm --needed fakeroot
   fi
 
+  if skip_in_ci "AUR package installation" "GitHub Actions Arch containers run as root and cannot build yay with makepkg"; then
+    return 0
+  fi
+
+  if [ "$(id -u)" -eq 0 ]; then
+    if [ "${#missing_packages[@]}" -gt 0 ]; then
+      log_info "Skipping AUR packages in root environment: ${missing_packages[*]}"
+    fi
+    return 0
+  fi
+
   if command -v yay >/dev/null 2>&1; then
     log_info "Yay is already installed."
   else

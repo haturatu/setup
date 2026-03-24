@@ -8,6 +8,10 @@ log_error() {
   echo "$*" >&2
 }
 
+is_ci() {
+  [ "${CI:-}" = "true" ] || [ "${GITHUB_ACTIONS:-}" = "true" ]
+}
+
 check_commands() {
   local missing=()
   local cmd
@@ -59,7 +63,27 @@ run_as_root() {
   return 1
 }
 
+skip_in_ci() {
+  local task_name="$1"
+  local reason="${2:-}"
+
+  if ! is_ci; then
+    return 1
+  fi
+
+  if [ -n "$reason" ]; then
+    log_info "Skipping $task_name in CI: $reason"
+  else
+    log_info "Skipping $task_name in CI."
+  fi
+  return 0
+}
+
 enable_ufw_if_possible() {
+  if skip_in_ci "firewall setup" "containerized runners cannot safely modify ufw or iptables"; then
+    return 0
+  fi
+
   if ! command -v ufw >/dev/null 2>&1; then
     log_info "ufw command not found. Skipping firewall setup."
     return 0

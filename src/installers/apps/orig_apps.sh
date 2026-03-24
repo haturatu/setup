@@ -53,6 +53,10 @@ install_app_payload() {
 }
 
 orig_app_setup() {
+  if skip_in_ci "personal app setup" "CI does not need to clone and install personal applications"; then
+    return 0
+  fi
+
   check_commands git || return
 
   local workspace_dir="$HOME/git"

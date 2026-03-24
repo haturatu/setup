@@ -1,6 +1,10 @@
 #!/bin/bash
 
 dotfiles_setup() {
+  if skip_in_ci "dotfiles setup" "CI does not need to install personal dotfiles"; then
+    return 0
+  fi
+
   check_commands git make || return
 
   local workspace_dir="$HOME/git"

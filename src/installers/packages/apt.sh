@@ -1,9 +1,16 @@
 #!/bin/bash
 
+APT_PACKAGE_FILE="$SCRIPT_DIR/config/packages/apt.txt"
+APT_DOCKER_PREREQUISITES_FILE="$SCRIPT_DIR/config/packages/apt-docker-prerequisites.txt"
+
 apt_setup_docker_repository() {
+  local docker_prerequisites=()
+
+  load_package_list "$APT_DOCKER_PREREQUISITES_FILE" docker_prerequisites
+
   log_info "Installing prerequisite packages for Docker repository..."
   run_as_root apt update -y
-  run_as_root apt install -y ca-certificates curl gnupg lsb-release
+  run_as_root apt install -y "${docker_prerequisites[@]}"
 
   log_info "Setting up Docker GPG key..."
   run_as_root install -m 0755 -d /etc/apt/keyrings
@@ -61,18 +68,16 @@ apt_postinstall_docker() {
 }
 
 apt_setup() {
+  local packages=()
+
+  load_package_list "$APT_PACKAGE_FILE" packages
   apt_setup_docker_repository
 
   log_info "Updating package lists..."
   run_as_root apt update -y
 
   log_info "Installing necessary packages..."
-  run_as_root apt install -y \
-    git vim curl golang-go build-essential \
-    python3 python3-pip python3-venv nodejs npm \
-    cargo wget 7zip rbenv ruby-build ufw tree python3-maturin \
-    docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
-    chafa bash-completion
+  run_as_root apt install -y "${packages[@]}"
 
   enable_ufw_if_possible
   apt_postinstall_docker

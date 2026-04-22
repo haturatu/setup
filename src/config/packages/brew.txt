@@ -1,0 +1,14 @@
+git
+vim
+curl
+go
+python
+node
+npm
+cargo
+wget
+p7zip
+rbenv
+ruby-build
+tree
+maturin

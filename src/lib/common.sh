@@ -48,6 +48,26 @@ ensure_dir() {
   mkdir -p "$1"
 }
 
+load_package_list() {
+  local file_path="$1"
+  local target_name="$2"
+  local line
+  local -n target_ref="$target_name"
+
+  target_ref=()
+
+  while IFS= read -r line || [ -n "$line" ]; do
+    case "$line" in
+      ""|\#*)
+        continue
+        ;;
+      *)
+        target_ref+=("$line")
+        ;;
+    esac
+  done < "$file_path"
+}
+
 run_as_root() {
   if [ "$(id -u)" -eq 0 ]; then
     "$@"

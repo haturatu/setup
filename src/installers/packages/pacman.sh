@@ -1,27 +1,26 @@
 #!/bin/bash
 
+PACMAN_PACKAGE_FILE="$SCRIPT_DIR/config/packages/pacman.txt"
+PACMAN_IME_PACKAGE_FILE="$SCRIPT_DIR/config/packages/pacman-ime.txt"
+
 pacman_setup() {
   log_info "Installing necessary packages..."
+
+  local base_packages=()
+  local repo_packages=()
+  local missing_packages=()
+  local ime_packages=()
+  local ime_install=()
+  local pkg
+
+  load_package_list "$PACMAN_PACKAGE_FILE" base_packages
+  load_package_list "$PACMAN_IME_PACKAGE_FILE" ime_packages
 
   if pacman -Qi linux-firmware >/dev/null 2>&1; then
     run_as_root pacman -Rdd --noconfirm linux-firmware
   fi
 
   run_as_root pacman -Syu --noconfirm
-
-  local base_packages=(
-    git vim curl go base-devel
-    python python-pip python-virtualenv
-    nodejs npm rust wget 7zip rbenv ruby-build
-    chromium geoip ufw tree maturin
-    docker docker-buildx docker-compose
-    chafa bash-completion
-  )
-  local repo_packages=()
-  local missing_packages=()
-  local ime_packages=(fcitx5 fcitx5-mozc fcitx5-configtool fcitx5-gtk fcitx5-qt)
-  local ime_install=()
-  local pkg
 
   for pkg in "${base_packages[@]}"; do
     if pacman -Si "$pkg" >/dev/null 2>&1; then
